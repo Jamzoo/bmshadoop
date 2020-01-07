@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bms.domain.modules.sys.dao.WorkExperienceMapper">
+  <resultMap id="BaseResultMap" type="com.bms.domain.modules.sys.entity.WorkExperience">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="entry_time" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="positive_time" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="dimission" javaType="java.lang.Byte" jdbcType="TINYINT" />
+      <arg column="work_experience" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="perform_certificate" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="person_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="acquisition_time" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="expiry_date" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="perform_no" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="perform_img" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, entry_time, positive_time, dimission, work_experience, perform_certificate, person_id, 
+    acquisition_time, expiry_date, perform_no, perform_img
+  </sql>
+  <select id="queryList" parameterType="com.bms.domain.modules.sys.entity.LeaveDetail" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from transfer_detail
+    <where>
+      <if test="performNo != null">
+        and perform_no=#{performNo}
+      </if>
+      <if test="performTmg != null">
+        and perform_img=#{performImg}
+      </if>
+      <if test="acquisitionTime != null">
+        and acquisition_time=#{acquisitionTime}
+      </if>
+      <if test="expiryDate != null">
+        and expiry_date=#{expiryDate}
+      </if>
+      <if test="entryTime != null">
+        and entry_time=#{entryTime}
+      </if>
+      <if test="positiveTime != null">
+        and positive_time=#{positiveTime}
+      </if>
+      <if test="dimission != null">
+        and dimission=#{dimission}
+      </if>
+      <if test="workExperience != null">
+        and work_experience=#{workExperience}
+      </if>
+      <if test="personId != null">
+        and person_id=#{personId}
+      </if>
+      <if test="performCertificate != null">
+        and performCertificate=#{performCertificate}
+      </if>
+    </where>
+  </select>
+
+  <select id="queryByPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from transfer_detail
+    <where>
+      <if test="performNo != null">
+        and perform_no=#{performNo}
+      </if>
+      <if test="performTmg != null">
+        and perform_img=#{performImg}
+      </if>
+      <if test="acquisitionTime != null">
+        and acquisition_time=#{acquisitionTime}
+      </if>
+      <if test="expiryDate != null">
+        and expiry_date=#{expiryDate}
+      </if>
+      <if test="entryTime != null">
+        and entry_time=#{entryTime}
+      </if>
+      <if test="positiveTime != null">
+        and positive_time=#{positiveTime}
+      </if>
+      <if test="dimission != null">
+        and dimission=#{dimission}
+      </if>
+      <if test="workExperience != null">
+        and work_experience=#{workExperience}
+      </if>
+      <if test="personId != null">
+        and person_id=#{personId}
+      </if>
+      <if test="performCertificate != null">
+        and performCertificate=#{performCertificate}
+      </if>
+    </where>
+    <if test="order != null">
+      order by #{order} #{sort}
+    </if>
+    limit #{offset},#{limit}
+    <!--    <if test="limit != null">-->
+    <!--      limit #{offset},#{limit}-->
+    <!--    </if>-->
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from work_experience
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from work_experience
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bms.domain.modules.sys.entity.WorkExperience">
+    insert into work_experience (id, entry_time, positive_time, 
+      dimission, work_experience, perform_certificate, 
+      person_id, acquisition_time, expiry_date, 
+      perform_no, perform_img)
+    values (#{id,jdbcType=INTEGER}, #{entryTime,jdbcType=INTEGER}, #{positiveTime,jdbcType=INTEGER}, 
+      #{dimission,jdbcType=TINYINT}, #{workExperience,jdbcType=VARCHAR}, #{performCertificate,jdbcType=VARCHAR}, 
+      #{personId,jdbcType=INTEGER}, #{acquisitionTime,jdbcType=INTEGER}, #{expiryDate,jdbcType=INTEGER}, 
+      #{performNo,jdbcType=VARCHAR}, #{performImg,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bms.domain.modules.sys.entity.WorkExperience">
+    insert into work_experience
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="entryTime != null">
+        entry_time,
+      </if>
+      <if test="positiveTime != null">
+        positive_time,
+      </if>
+      <if test="dimission != null">
+        dimission,
+      </if>
+      <if test="workExperience != null">
+        work_experience,
+      </if>
+      <if test="performCertificate != null">
+        perform_certificate,
+      </if>
+      <if test="personId != null">
+        person_id,
+      </if>
+      <if test="acquisitionTime != null">
+        acquisition_time,
+      </if>
+      <if test="expiryDate != null">
+        expiry_date,
+      </if>
+      <if test="performNo != null">
+        perform_no,
+      </if>
+      <if test="performImg != null">
+        perform_img,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="entryTime != null">
+        #{entryTime,jdbcType=INTEGER},
+      </if>
+      <if test="positiveTime != null">
+        #{positiveTime,jdbcType=INTEGER},
+      </if>
+      <if test="dimission != null">
+        #{dimission,jdbcType=TINYINT},
+      </if>
+      <if test="workExperience != null">
+        #{workExperience,jdbcType=VARCHAR},
+      </if>
+      <if test="performCertificate != null">
+        #{performCertificate,jdbcType=VARCHAR},
+      </if>
+      <if test="personId != null">
+        #{personId,jdbcType=INTEGER},
+      </if>
+      <if test="acquisitionTime != null">
+        #{acquisitionTime,jdbcType=INTEGER},
+      </if>
+      <if test="expiryDate != null">
+        #{expiryDate,jdbcType=INTEGER},
+      </if>
+      <if test="performNo != null">
+        #{performNo,jdbcType=VARCHAR},
+      </if>
+      <if test="performImg != null">
+        #{performImg,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bms.domain.modules.sys.entity.WorkExperience">
+    update work_experience
+    <set>
+      <if test="entryTime != null">
+        entry_time = #{entryTime,jdbcType=INTEGER},
+      </if>
+      <if test="positiveTime != null">
+        positive_time = #{positiveTime,jdbcType=INTEGER},
+      </if>
+      <if test="dimission != null">
+        dimission = #{dimission,jdbcType=TINYINT},
+      </if>
+      <if test="workExperience != null">
+        work_experience = #{workExperience,jdbcType=VARCHAR},
+      </if>
+      <if test="performCertificate != null">
+        perform_certificate = #{performCertificate,jdbcType=VARCHAR},
+      </if>
+      <if test="personId != null">
+        person_id = #{personId,jdbcType=INTEGER},
+      </if>
+      <if test="acquisitionTime != null">
+        acquisition_time = #{acquisitionTime,jdbcType=INTEGER},
+      </if>
+      <if test="expiryDate != null">
+        expiry_date = #{expiryDate,jdbcType=INTEGER},
+      </if>
+      <if test="performNo != null">
+        perform_no = #{performNo,jdbcType=VARCHAR},
+      </if>
+      <if test="performImg != null">
+        perform_img = #{performImg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bms.domain.modules.sys.entity.WorkExperience">
+    update work_experience
+    set entry_time = #{entryTime,jdbcType=INTEGER},
+      positive_time = #{positiveTime,jdbcType=INTEGER},
+      dimission = #{dimission,jdbcType=TINYINT},
+      work_experience = #{workExperience,jdbcType=VARCHAR},
+      perform_certificate = #{performCertificate,jdbcType=VARCHAR},
+      person_id = #{personId,jdbcType=INTEGER},
+      acquisition_time = #{acquisitionTime,jdbcType=INTEGER},
+      expiry_date = #{expiryDate,jdbcType=INTEGER},
+      perform_no = #{performNo,jdbcType=VARCHAR},
+      perform_img = #{performImg,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

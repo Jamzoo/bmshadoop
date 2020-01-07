@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bms.domain.modules.sys.dao.PersonnelRecordsMapper">
+  <resultMap id="BaseResultMap" type="com.bms.domain.modules.sys.entity.PersonnelRecords">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="person_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="hospital_id" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="apply_for" javaType="java.lang.Byte" jdbcType="TINYINT" />
+      <arg column="memo" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="create_time" javaType="java.lang.Long" jdbcType="INTEGER" />
+      <arg column="create_time_str" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, person_id, hospital_id, apply_for, memo,create_time
+  </sql>
+  <select id="queryList" parameterType="com.bms.domain.modules.sys.entity.PersonnelRecords" resultMap="BaseResultMap">
+    select
+
+    <include refid="Base_Column_List" />,
+    from_unixtime(create_time, '%Y-%m-%d %H:%i:%s') as create_time_str
+    from personnel_records
+    <where>
+      <if test="personId != null">
+        and person_id=#{personId},
+      </if>
+      <if test="hospitalId != null">
+        and hospital_id=#{hospitalId},
+      </if>
+      <if test="applyFor != null">
+        and apply_for=#{applyFor},
+      </if>
+      <if test="personId != null">
+        and person_id=#{personId},
+      </if>
+      <if test="memo != null">
+        and memo=#{memo},
+      </if>
+    </where>
+  </select>
+
+  <select id="queryByPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+
+    <include refid="Base_Column_List" />,
+    from_unixtime(create_time, '%Y-%m-%d %H:%i:%s') as create_time_str
+    from personnel_records
+    <where>
+      <if test="personId != null">
+        and person_id=#{personId},
+      </if>
+      <if test="hospitalId != null">
+        and hospital_id=#{hospitalId},
+      </if>
+      <if test="applyFor != null">
+        and apply_for=#{applyFor},
+      </if>
+      <if test="personId != null">
+        and person_id=#{personId},
+      </if>
+      <if test="memo != null">
+        and memo=#{memo},
+      </if>
+    </where>
+    <if test="order != null">
+      order by #{order} #{sort}
+    </if>
+    limit #{offset},#{limit}
+<!--    <if test="limit != null">-->
+<!--      limit #{offset},#{limit}-->
+<!--    </if>-->
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from personnel_records
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from personnel_records
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bms.domain.modules.sys.entity.PersonnelRecords">
+    insert into personnel_records (id, person_id, hospital_id, 
+      apply_for, memo,create_time)
+    values (#{id,jdbcType=INTEGER}, #{personId,jdbcType=INTEGER}, #{hospitalId,jdbcType=VARCHAR}, 
+      #{applyFor,jdbcType=TINYINT}, #{memo,jdbcType=VARCHAR},unix_timestamp())
+  </insert>
+  <insert id="insertSelective" parameterType="com.bms.domain.modules.sys.entity.PersonnelRecords">
+    insert into personnel_records
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="personId != null">
+        person_id,
+      </if>
+      <if test="hospitalId != null">
+        hospital_id,
+      </if>
+      <if test="applyFor != null">
+        apply_for,
+      </if>
+      <if test="memo != null">
+        memo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="personId != null">
+        #{personId,jdbcType=INTEGER},
+      </if>
+      <if test="hospitalId != null">
+        #{hospitalId,jdbcType=VARCHAR},
+      </if>
+      <if test="applyFor != null">
+        #{applyFor,jdbcType=TINYINT},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bms.domain.modules.sys.entity.PersonnelRecords">
+    update personnel_records
+    <set>
+      <if test="personId != null">
+        person_id = #{personId,jdbcType=INTEGER},
+      </if>
+      <if test="hospitalId != null">
+        hospital_id = #{hospitalId,jdbcType=VARCHAR},
+      </if>
+      <if test="applyFor != null">
+        apply_for = #{applyFor,jdbcType=TINYINT},
+      </if>
+      <if test="memo != null">
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bms.domain.modules.sys.entity.PersonnelRecords">
+    update personnel_records
+    set person_id = #{personId,jdbcType=INTEGER},
+      hospital_id = #{hospitalId,jdbcType=VARCHAR},
+      apply_for = #{applyFor,jdbcType=TINYINT},
+      memo = #{memo,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+</mapper>

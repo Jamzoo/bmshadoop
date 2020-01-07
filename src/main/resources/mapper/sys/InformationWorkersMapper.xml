@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bms.domain.modules.sys.dao.InformationWorkersMapper">
+  <resultMap id="BaseResultMap" type="com.bms.domain.modules.sys.entity.InformationWorkers">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="person_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="summer_jacket_size" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="summer_pants_size" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="summer_shoe_size" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="winter shoe size" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="winter_jacket_size" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="winter_pants_size" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="memo" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, person_id, summer_jacket_size, summer_pants_size, summer_shoe_size, "winter shoe size", 
+    winter_jacket_size, winter_pants_size, memo
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from information_workers
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from information_workers
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bms.domain.modules.sys.entity.InformationWorkers">
+    insert into information_workers (id, person_id, summer_jacket_size, 
+      summer_pants_size, summer_shoe_size, "winter shoe size", 
+      winter_jacket_size, winter_pants_size, memo
+      )
+    values (#{id,jdbcType=INTEGER}, #{personId,jdbcType=INTEGER}, #{summerJacketSize,jdbcType=VARCHAR}, 
+      #{summerPantsSize,jdbcType=VARCHAR}, #{summerShoeSize,jdbcType=VARCHAR}, #{winterShoeSize,jdbcType=VARCHAR}, 
+      #{winterJacketSize,jdbcType=VARCHAR}, #{winterPantsSize,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bms.domain.modules.sys.entity.InformationWorkers">
+    insert into information_workers
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="personId != null">
+        person_id,
+      </if>
+      <if test="summerJacketSize != null">
+        summer_jacket_size,
+      </if>
+      <if test="summerPantsSize != null">
+        summer_pants_size,
+      </if>
+      <if test="summerShoeSize != null">
+        summer_shoe_size,
+      </if>
+      <if test="winterShoeSize != null">
+        "winter shoe size",
+      </if>
+      <if test="winterJacketSize != null">
+        winter_jacket_size,
+      </if>
+      <if test="winterPantsSize != null">
+        winter_pants_size,
+      </if>
+      <if test="memo != null">
+        memo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="personId != null">
+        #{personId,jdbcType=INTEGER},
+      </if>
+      <if test="summerJacketSize != null">
+        #{summerJacketSize,jdbcType=VARCHAR},
+      </if>
+      <if test="summerPantsSize != null">
+        #{summerPantsSize,jdbcType=VARCHAR},
+      </if>
+      <if test="summerShoeSize != null">
+        #{summerShoeSize,jdbcType=VARCHAR},
+      </if>
+      <if test="winterShoeSize != null">
+        #{winterShoeSize,jdbcType=VARCHAR},
+      </if>
+      <if test="winterJacketSize != null">
+        #{winterJacketSize,jdbcType=VARCHAR},
+      </if>
+      <if test="winterPantsSize != null">
+        #{winterPantsSize,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bms.domain.modules.sys.entity.InformationWorkers">
+    update information_workers
+    <set>
+      <if test="personId != null">
+        person_id = #{personId,jdbcType=INTEGER},
+      </if>
+      <if test="summerJacketSize != null">
+        summer_jacket_size = #{summerJacketSize,jdbcType=VARCHAR},
+      </if>
+      <if test="summerPantsSize != null">
+        summer_pants_size = #{summerPantsSize,jdbcType=VARCHAR},
+      </if>
+      <if test="summerShoeSize != null">
+        summer_shoe_size = #{summerShoeSize,jdbcType=VARCHAR},
+      </if>
+      <if test="winterShoeSize != null">
+        "winter shoe size" = #{winterShoeSize,jdbcType=VARCHAR},
+      </if>
+      <if test="winterJacketSize != null">
+        winter_jacket_size = #{winterJacketSize,jdbcType=VARCHAR},
+      </if>
+      <if test="winterPantsSize != null">
+        winter_pants_size = #{winterPantsSize,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bms.domain.modules.sys.entity.InformationWorkers">
+    update information_workers
+    set person_id = #{personId,jdbcType=INTEGER},
+      summer_jacket_size = #{summerJacketSize,jdbcType=VARCHAR},
+      summer_pants_size = #{summerPantsSize,jdbcType=VARCHAR},
+      summer_shoe_size = #{summerShoeSize,jdbcType=VARCHAR},
+      "winter shoe size" = #{winterShoeSize,jdbcType=VARCHAR},
+      winter_jacket_size = #{winterJacketSize,jdbcType=VARCHAR},
+      winter_pants_size = #{winterPantsSize,jdbcType=VARCHAR},
+      memo = #{memo,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

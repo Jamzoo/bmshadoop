@@ -1,0 +1,66 @@
+server: 
+   port: 8018
+   address: 0.0.0.0
+   context-path: /bms
+   #ssl:
+      #key-store: classpath:bmsSSL.jks
+      #key-store-password: 5A0CnPV0
+      #key-store-type: jks
+      #key-alias: alias  templates
+       
+web:
+   upload-path: /usr/local/bms_file/
+spring: 
+   mvc: 
+      static-path-pattern: /**
+   resources:
+      static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${web.upload-path}
+   servlet:
+      multipart:
+         maxFileSize: 300MB
+         maxRequestSize: 300MB  
+   datasource:
+     primary:
+         url: jdbc:mysql://127.0.0.1:3306/hsj?characterEncoding=UTF-8&useSSL=false&autoReconnect=true&failOverReadOnly=false&testOnBorrow=true&useCompression=true&allowMultiQueries=true
+         username: root
+         password: root1234
+         driver-class-name: com.mysql.jdbc.Driver
+         login-timeout: 6000
+         max-idle: 50
+         max-wait: 86400
+         min-idle: 5
+         initial-size: 50
+     db:
+         url: jdbc:mysql://127.0.0.1:3306/springboot?characterEncoding=UTF-8&useSSL=false&autoReconnect=true&failOverReadOnly=false&testOnBorrow=true&allowMultiQueries=true
+         username: root
+         password: root1234
+         driver-class-name: com.mysql.jdbc.Driver
+         login-timeout: 6000
+         max-idle: 50
+         max-wait: 86400
+         min-idle: 5
+         initial-size: 50
+     rtdb:
+         url: jdbc:mysql://127.0.0.1:3306/springboot2?characterEncoding=UTF-8&useSSL=false&autoReconnect=true&failOverReadOnly=false&testOnBorrow=true&allowMultiQueries=true
+         username: root
+         password: root1234
+         driver-class-name: com.mysql.jdbc.Driver
+         login-timeout: 6000
+         max-idle: 50
+         max-wait: 86400
+         min-idle: 5
+         initial-size: 50
+logging:
+  level:
+    com.bms.domain: debug
+  #pagehelper分页插件
+ # type-aliases-package: com.bms.domain.modules
+  #check-config-location: true
+jwtconfig:
+  # APP模块，是通过jwt认证的，如果要使用APP模块，则需要修改【加密秘钥】
+  jwt:
+    # 加密秘钥
+    secret: f4e2e52034348f86b67cde581c0f9eb5
+    # token有效时长，7天，单位秒
+    expire: 604800
+    header: token

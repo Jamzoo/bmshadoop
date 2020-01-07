@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bms.domain.modules.sys.dao.PersonMapper">
+  <resultMap id="BaseResultMap" type="com.bms.domain.modules.sys.entity.Person">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="sex" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="id_card" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="birthday" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="height" javaType="java.lang.Double" jdbcType="DOUBLE" />
+      <arg column="weight" javaType="java.lang.Double" jdbcType="DOUBLE" />
+      <arg column="blod" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="marriage" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="heath" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="mobile" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="phone" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="mail" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="address" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="colleage" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="graduation_data" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="education" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="degree" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="major" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="politics" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="personnel_type" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="hierarchy" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="speciality" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="hobby" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="computer_rank" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="english_rank" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="duty" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="station" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="departments" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, sex, id_card, birthday, height, weight, blod, marriage, heath, mobile, 
+    phone, mail, address, colleage, graduation_data, education, degree, major, politics, 
+    personnel_type, hierarchy, speciality, hobby, computer_rank, english_rank, duty, 
+    station, departments
+  </sql>
+  <select id="queryList" parameterType="com.bms.domain.modules.sys.entity.LeaveDetail" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from person
+    <where>
+      <if test="name != null">
+        and name=#{name}
+      </if>
+      <if test="sex != null">
+        and sex=#{sex}
+      </if>
+      <if test="idCard != null">
+        and id_card=#{idCard}
+      </if>
+      <if test="birthday != null">
+        and birthday=#{birthday}
+      </if>
+      <if test="height != null">
+        and height=#{height}
+      </if>
+    </where>
+  </select>
+
+  <select id="queryByPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from person
+    <where>
+      <if test="name != null">
+        and name=#{name}
+      </if>
+      <if test="sex != null">
+        and sex=#{sex}
+      </if>
+      <if test="idCard != null">
+        and id_card=#{idCard}
+      </if>
+      <if test="birthday != null">
+        and birthday=#{birthday}
+      </if>
+      <if test="height != null">
+        and height=#{height}
+      </if>
+    </where>
+    <if test="order != null">
+      order by #{order} #{sort}
+    </if>
+    limit #{offset},#{limit}
+    <!--    <if test="limit != null">-->
+    <!--      limit #{offset},#{limit}-->
+    <!--    </if>-->
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from person
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from person
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bms.domain.modules.sys.entity.Person">
+    insert into person (id, name, sex, id_card, 
+      birthday, height, weight, 
+      blod, marriage, heath, 
+      mobile, phone, mail, 
+      address, colleage, graduation_data, 
+      education, degree, major, 
+      politics, personnel_type, hierarchy, 
+      speciality, hobby, computer_rank, 
+      english_rank, duty, station, 
+      departments)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{idCard,jdbcType=VARCHAR}, 
+      #{birthday,jdbcType=INTEGER}, #{height,jdbcType=DOUBLE}, #{weight,jdbcType=DOUBLE}, 
+      #{blod,jdbcType=VARCHAR}, #{marriage,jdbcType=CHAR}, #{heath,jdbcType=VARCHAR}, 
+      #{mobile,jdbcType=INTEGER}, #{phone,jdbcType=INTEGER}, #{mail,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{colleage,jdbcType=VARCHAR}, #{graduationData,jdbcType=INTEGER}, 
+      #{education,jdbcType=VARCHAR}, #{degree,jdbcType=VARCHAR}, #{major,jdbcType=VARCHAR}, 
+      #{politics,jdbcType=VARCHAR}, #{personnelType,jdbcType=VARCHAR}, #{hierarchy,jdbcType=VARCHAR}, 
+      #{speciality,jdbcType=VARCHAR}, #{hobby,jdbcType=VARCHAR}, #{computerRank,jdbcType=VARCHAR}, 
+      #{englishRank,jdbcType=VARCHAR}, #{duty,jdbcType=VARCHAR}, #{station,jdbcType=VARCHAR}, 
+      #{departments,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bms.domain.modules.sys.entity.Person">
+    insert into person
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="idCard != null">
+        id_card,
+      </if>
+      <if test="birthday != null">
+        birthday,
+      </if>
+      <if test="height != null">
+        height,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="blod != null">
+        blod,
+      </if>
+      <if test="marriage != null">
+        marriage,
+      </if>
+      <if test="heath != null">
+        heath,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="mail != null">
+        mail,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="colleage != null">
+        colleage,
+      </if>
+      <if test="graduationData != null">
+        graduation_data,
+      </if>
+      <if test="education != null">
+        education,
+      </if>
+      <if test="degree != null">
+        degree,
+      </if>
+      <if test="major != null">
+        major,
+      </if>
+      <if test="politics != null">
+        politics,
+      </if>
+      <if test="personnelType != null">
+        personnel_type,
+      </if>
+      <if test="hierarchy != null">
+        hierarchy,
+      </if>
+      <if test="speciality != null">
+        speciality,
+      </if>
+      <if test="hobby != null">
+        hobby,
+      </if>
+      <if test="computerRank != null">
+        computer_rank,
+      </if>
+      <if test="englishRank != null">
+        english_rank,
+      </if>
+      <if test="duty != null">
+        duty,
+      </if>
+      <if test="station != null">
+        station,
+      </if>
+      <if test="departments != null">
+        departments,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=CHAR},
+      </if>
+      <if test="idCard != null">
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=INTEGER},
+      </if>
+      <if test="height != null">
+        #{height,jdbcType=DOUBLE},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="blod != null">
+        #{blod,jdbcType=VARCHAR},
+      </if>
+      <if test="marriage != null">
+        #{marriage,jdbcType=CHAR},
+      </if>
+      <if test="heath != null">
+        #{heath,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=INTEGER},
+      </if>
+      <if test="mail != null">
+        #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="colleage != null">
+        #{colleage,jdbcType=VARCHAR},
+      </if>
+      <if test="graduationData != null">
+        #{graduationData,jdbcType=INTEGER},
+      </if>
+      <if test="education != null">
+        #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="degree != null">
+        #{degree,jdbcType=VARCHAR},
+      </if>
+      <if test="major != null">
+        #{major,jdbcType=VARCHAR},
+      </if>
+      <if test="politics != null">
+        #{politics,jdbcType=VARCHAR},
+      </if>
+      <if test="personnelType != null">
+        #{personnelType,jdbcType=VARCHAR},
+      </if>
+      <if test="hierarchy != null">
+        #{hierarchy,jdbcType=VARCHAR},
+      </if>
+      <if test="speciality != null">
+        #{speciality,jdbcType=VARCHAR},
+      </if>
+      <if test="hobby != null">
+        #{hobby,jdbcType=VARCHAR},
+      </if>
+      <if test="computerRank != null">
+        #{computerRank,jdbcType=VARCHAR},
+      </if>
+      <if test="englishRank != null">
+        #{englishRank,jdbcType=VARCHAR},
+      </if>
+      <if test="duty != null">
+        #{duty,jdbcType=VARCHAR},
+      </if>
+      <if test="station != null">
+        #{station,jdbcType=VARCHAR},
+      </if>
+      <if test="departments != null">
+        #{departments,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bms.domain.modules.sys.entity.Person">
+    update person
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=CHAR},
+      </if>
+      <if test="idCard != null">
+        id_card = #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        birthday = #{birthday,jdbcType=INTEGER},
+      </if>
+      <if test="height != null">
+        height = #{height,jdbcType=DOUBLE},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="blod != null">
+        blod = #{blod,jdbcType=VARCHAR},
+      </if>
+      <if test="marriage != null">
+        marriage = #{marriage,jdbcType=CHAR},
+      </if>
+      <if test="heath != null">
+        heath = #{heath,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=INTEGER},
+      </if>
+      <if test="mail != null">
+        mail = #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="colleage != null">
+        colleage = #{colleage,jdbcType=VARCHAR},
+      </if>
+      <if test="graduationData != null">
+        graduation_data = #{graduationData,jdbcType=INTEGER},
+      </if>
+      <if test="education != null">
+        education = #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="degree != null">
+        degree = #{degree,jdbcType=VARCHAR},
+      </if>
+      <if test="major != null">
+        major = #{major,jdbcType=VARCHAR},
+      </if>
+      <if test="politics != null">
+        politics = #{politics,jdbcType=VARCHAR},
+      </if>
+      <if test="personnelType != null">
+        personnel_type = #{personnelType,jdbcType=VARCHAR},
+      </if>
+      <if test="hierarchy != null">
+        hierarchy = #{hierarchy,jdbcType=VARCHAR},
+      </if>
+      <if test="speciality != null">
+        speciality = #{speciality,jdbcType=VARCHAR},
+      </if>
+      <if test="hobby != null">
+        hobby = #{hobby,jdbcType=VARCHAR},
+      </if>
+      <if test="computerRank != null">
+        computer_rank = #{computerRank,jdbcType=VARCHAR},
+      </if>
+      <if test="englishRank != null">
+        english_rank = #{englishRank,jdbcType=VARCHAR},
+      </if>
+      <if test="duty != null">
+        duty = #{duty,jdbcType=VARCHAR},
+      </if>
+      <if test="station != null">
+        station = #{station,jdbcType=VARCHAR},
+      </if>
+      <if test="departments != null">
+        departments = #{departments,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bms.domain.modules.sys.entity.Person">
+    update person
+    set name = #{name,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=CHAR},
+      id_card = #{idCard,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=INTEGER},
+      height = #{height,jdbcType=DOUBLE},
+      weight = #{weight,jdbcType=DOUBLE},
+      blod = #{blod,jdbcType=VARCHAR},
+      marriage = #{marriage,jdbcType=CHAR},
+      heath = #{heath,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=INTEGER},
+      mail = #{mail,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      colleage = #{colleage,jdbcType=VARCHAR},
+      graduation_data = #{graduationData,jdbcType=INTEGER},
+      education = #{education,jdbcType=VARCHAR},
+      degree = #{degree,jdbcType=VARCHAR},
+      major = #{major,jdbcType=VARCHAR},
+      politics = #{politics,jdbcType=VARCHAR},
+      personnel_type = #{personnelType,jdbcType=VARCHAR},
+      hierarchy = #{hierarchy,jdbcType=VARCHAR},
+      speciality = #{speciality,jdbcType=VARCHAR},
+      hobby = #{hobby,jdbcType=VARCHAR},
+      computer_rank = #{computerRank,jdbcType=VARCHAR},
+      english_rank = #{englishRank,jdbcType=VARCHAR},
+      duty = #{duty,jdbcType=VARCHAR},
+      station = #{station,jdbcType=VARCHAR},
+      departments = #{departments,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+</mapper>

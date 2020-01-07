@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bms.domain.modules.sys.dao.HospitalMapper">
+  <resultMap id="BaseResultMap" type="com.bms.domain.modules.sys.entity.Hospital">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="hospital_type" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="hospital_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="hospital_location" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="hospital_logo" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, hospital_type, hospital_name, hospital_location, hospital_logo
+  </sql>
+  <select id="queryList" parameterType="com.bms.domain.modules.sys.entity.Hospital" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from hospital
+    <where>
+      <if test="hospitalType != null">
+        and hospital_type=#{hospitalType},
+      </if>
+      <if test="hospitalName != null">
+        and hospital_name=#{hospitalName},
+      </if>
+      <if test="hospitalLocation != null">
+        and hospital_location=#{hospitalLocation},
+      </if>
+      <if test="hospitalLogo != null">
+        and hospital_logo=#{hospitalLogo},
+      </if>
+    </where>
+  </select>
+  <select id="queryTotal" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+    select
+     count(id)
+    from hospital
+    <where>
+      <if test="hospitalType != null">
+        and hospital_type=#{hospitalType},
+      </if>
+      <if test="hospitalName != null">
+        and hospital_name=#{hospitalName},
+      </if>
+      <if test="hospitalLocation != null">
+        and hospital_location=#{hospitalLocation},
+      </if>
+      <if test="hospitalLogo != null">
+        and hospital_logo=#{hospitalLogo},
+      </if>
+    </where>
+  </select>
+
+  <select id="queryByPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from hospital
+    <where>
+      <if test="hospitalType != null">
+        and hospital_type=#{hospitalType}
+      </if>
+      <if test="hospitalName != null">
+        and hospital_name=#{hospitalName}
+      </if>
+      <if test="hospitalLocation != null">
+        and hospital_location=#{hospitalLocation}
+      </if>
+      <if test="hospitalLogo != null">
+        and hospital_logo=#{hospitalLogo}
+      </if>
+    </where>
+    <if test="order != null">
+      order by #{order} #{sort}
+    </if>
+    limit #{offset},#{limit}
+    <!--    <if test="limit != null">-->
+    <!--      limit #{offset},#{limit}-->
+    <!--    </if>-->
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hospital
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from hospital
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bms.domain.modules.sys.entity.Hospital">
+    insert into hospital (id, hospital_type, hospital_name, 
+      hospital_location, hospital_logo)
+    values (#{id,jdbcType=INTEGER}, #{hospitalType,jdbcType=VARCHAR}, #{hospitalName,jdbcType=VARCHAR}, 
+      #{hospitalLocation,jdbcType=VARCHAR}, #{hospitalLogo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bms.domain.modules.sys.entity.Hospital">
+    insert into hospital
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="hospitalType != null">
+        hospital_type,
+      </if>
+      <if test="hospitalName != null">
+        hospital_name,
+      </if>
+      <if test="hospitalLocation != null">
+        hospital_location,
+      </if>
+      <if test="hospitalLogo != null">
+        hospital_logo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="hospitalType != null">
+        #{hospitalType,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalName != null">
+        #{hospitalName,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalLocation != null">
+        #{hospitalLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalLogo != null">
+        #{hospitalLogo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bms.domain.modules.sys.entity.Hospital">
+    update hospital
+    <set>
+      <if test="hospitalType != null">
+        hospital_type = #{hospitalType,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalName != null">
+        hospital_name = #{hospitalName,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalLocation != null">
+        hospital_location = #{hospitalLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalLogo != null">
+        hospital_logo = #{hospitalLogo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bms.domain.modules.sys.entity.Hospital">
+    update hospital
+    set hospital_type = #{hospitalType,jdbcType=VARCHAR},
+      hospital_name = #{hospitalName,jdbcType=VARCHAR},
+      hospital_location = #{hospitalLocation,jdbcType=VARCHAR},
+      hospital_logo = #{hospitalLogo,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

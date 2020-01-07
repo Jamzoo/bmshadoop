@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bms.domain.modules.sys.dao.InternshipDetailMapper">
+  <resultMap id="BaseResultMap" type="com.bms.domain.modules.sys.entity.InternshipDetail">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="person_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="internship_proof" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="start_time" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="end_time" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="hospital_id" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="hospital_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, person_id, internship_proof, start_time, end_time, hospital_id, hospital_name
+  </sql>
+  <select id="queryList" parameterType="com.bms.domain.modules.sys.entity.InternshipDetail" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from internship_detail
+    <where>
+      <if test="personId != null">
+        and person_id=#{personId}
+      </if>
+      <if test="internshipProof != null">
+        and internship_proof=#{internshipProof}
+      </if>
+      <if test="startTime != null">
+        and start_time=#{startTime}
+      </if>
+      <if test="endTime != null">
+        and end_time=#{endTime}
+      </if>
+      <if test="hospitalId != null">
+        and hospital_id=#{hospitalId}
+      </if>
+      <if test="hospitalName != null">
+        and hospital_name=#{hospitalName}
+      </if>
+    </where>
+  </select>
+
+  <select id="queryByPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from internship_detail
+    <where>
+      <if test="personId != null">
+        and person_id=#{personId}
+      </if>
+      <if test="internshipProof != null">
+        and internship_proof=#{internshipProof}
+      </if>
+      <if test="startTime != null">
+        and start_time=#{startTime}
+      </if>
+      <if test="endTime != null">
+        and end_time=#{endTime}
+      </if>
+      <if test="hospitalId != null">
+        and hospital_id=#{hospitalId}
+      </if>
+      <if test="hospitalName != null">
+        and hospital_name=#{hospitalName}
+      </if>
+    </where>
+    <if test="order != null">
+      order by #{order} #{sort}
+    </if>
+    limit #{offset},#{limit}
+    <!--    <if test="limit != null">-->
+    <!--      limit #{offset},#{limit}-->
+    <!--    </if>-->
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from internship_detail
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from internship_detail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bms.domain.modules.sys.entity.InternshipDetail">
+    insert into internship_detail (id, person_id, internship_proof, 
+      start_time, end_time, hospital_id, 
+      hospital_name)
+    values (#{id,jdbcType=INTEGER}, #{personId,jdbcType=INTEGER}, #{internshipProof,jdbcType=VARCHAR}, 
+      #{startTime,jdbcType=INTEGER}, #{endTime,jdbcType=INTEGER}, #{hospitalId,jdbcType=VARCHAR}, 
+      #{hospitalName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bms.domain.modules.sys.entity.InternshipDetail">
+    insert into internship_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="personId != null">
+        person_id,
+      </if>
+      <if test="internshipProof != null">
+        internship_proof,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="hospitalId != null">
+        hospital_id,
+      </if>
+      <if test="hospitalName != null">
+        hospital_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="personId != null">
+        #{personId,jdbcType=INTEGER},
+      </if>
+      <if test="internshipProof != null">
+        #{internshipProof,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=INTEGER},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=INTEGER},
+      </if>
+      <if test="hospitalId != null">
+        #{hospitalId,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalName != null">
+        #{hospitalName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bms.domain.modules.sys.entity.InternshipDetail">
+    update internship_detail
+    <set>
+      <if test="personId != null">
+        person_id = #{personId,jdbcType=INTEGER},
+      </if>
+      <if test="internshipProof != null">
+        internship_proof = #{internshipProof,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=INTEGER},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=INTEGER},
+      </if>
+      <if test="hospitalId != null">
+        hospital_id = #{hospitalId,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalName != null">
+        hospital_name = #{hospitalName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bms.domain.modules.sys.entity.InternshipDetail">
+    update internship_detail
+    set person_id = #{personId,jdbcType=INTEGER},
+      internship_proof = #{internshipProof,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=INTEGER},
+      end_time = #{endTime,jdbcType=INTEGER},
+      hospital_id = #{hospitalId,jdbcType=VARCHAR},
+      hospital_name = #{hospitalName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
